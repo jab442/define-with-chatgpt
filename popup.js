@@ -1,12 +1,13 @@
 // popup.js
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.result) {
-      document.getElementById('result').textContent = request.result;
-    }
-  });
+document.addEventListener('DOMContentLoaded', () => {
+    chrome.tabs.query({active: true, currentWindow: true}, tabs => {
+      chrome.tabs.sendMessage(tabs[0].id, {action: "fetchResponse"});
+    });
   
-  // Send a message to the content script to trigger getting the selected text.
-  chrome.tabs.query({active: true, currentWindow: true}, tabs => {
-    chrome.tabs.sendMessage(tabs[0].id, { trigger: "getResult" });
+    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+      if (request.action === "displayResponse") {
+        document.getElementById('response').textContent = request.data;
+      }
+    });
   });
   

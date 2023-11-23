@@ -8,6 +8,7 @@ function getSelectedText() {
   
   chrome.runtime.sendMessage({ text: getSelectedText() });
   */
+ /*
 function getSelectedText() {
     return window.getSelection().toString().trim();
 }
@@ -17,4 +18,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.command === 'sendText') {
         chrome.runtime.sendMessage({ text: getSelectedText() });
     }
-});
+});*/
+// popup.js
+document.addEventListener('DOMContentLoaded', () => {
+    chrome.tabs.query({active: true, currentWindow: true}, tabs => {
+      chrome.tabs.sendMessage(tabs[0].id, {action: "fetchResponse"});
+    });
+  
+    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+      if (request.action === "displayResponse") {
+        document.getElementById('response').textContent = request.data;
+      }
+    });
+  });
+  
