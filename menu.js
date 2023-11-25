@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (data.apiKey) {
-            apiKeyInput.value = data.apiKey;
+            apiKeyInput.value = data.apiKey.trim();
             console.log('Loaded saved API key:', data.apiKey);
         }
     });
