@@ -27,6 +27,13 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === "sendSelectedText") {
     setApiKey();
+    if (!apiKey) {
+      chrome.windows.create({
+        url: chrome.runtime.getURL("menu.html"),
+        type: 'popup'
+      });
+      return;
+    }
     let selectedText = info.selectionText;
     if (selectedText) {
       chrome.scripting.executeScript({
@@ -57,6 +64,10 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         })
         .then(response => response.json())
         .then(data => {
+          if(data.error){
+            error(data.error.message);
+            return;
+          }
           lastResponse = data.choices[0].message.content;
           chrome.storage.local.set({ responseData: lastResponse }, function () {
             console.log('Data is set to ' + lastResponse);
@@ -75,3 +86,14 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     }
   }
 });
+function error(
+  message = 'An error occurred. Please try again later.',
+  title = 'Error'
+) {
+  chrome.notifications.create({
+    type: 'basic',
+    iconUrl: chrome.runtime.getURL('icons/define-with-chat-gpt.png'),
+    title,
+    message
+  });
+}

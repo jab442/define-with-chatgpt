@@ -3,11 +3,12 @@
         background-color: darkgrey;
     }
     .menu {
-        min-width: 30vw;
-        min-height: 100%;
+        min-width: 50vw;
+        min-height: 30vh;
         padding:20px;
         background-color: grey;
         color:white!important;
+        font-family:sans-serif
     }
     .menu label{
         font-size: 24px;
@@ -16,12 +17,21 @@
         font-size:32px;
         text-align:center;
     }
+    textarea#apiKey {
+        margin-top:10px;
+        border-radius: 5px;
+        width: 100%;
+        height: 200px;
+        padding: 5px;
+        font-size: 20px;
+    }
 </style>
 
 <div class="menu">
     <h1>Define with ChatGPT</h1>
     <label for="apiKey">ChatGPT API key:</label>
-    <input id="apiKey" type="text">
+    <textarea id="apiKey" type="text">
+    </textarea>
 </div>
 
 <script src="menu.js"></script>
