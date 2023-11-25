@@ -18,7 +18,7 @@ let model = "gpt-4-1106-preview";
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: "sendSelectedText",
-    title: "Define with Chat GPT",
+    title: "Define with ChatGPT",
     contexts: ["selection"]
   });
 });
