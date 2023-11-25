@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     apiKeyInput.addEventListener('change', () => {
-        const newApiKey = apiKeyInput.value;
+        const newApiKey = apiKeyInput.value.trim();
         chrome.storage.local.set({ apiKey: newApiKey }, () => {
             if (chrome.runtime.lastError) {
                 console.error('Error saving apiKey:', chrome.runtime.lastError);

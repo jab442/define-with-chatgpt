@@ -6,7 +6,7 @@ setApiKey();
 function setApiKey(){
   chrome.storage.local.get('apiKey', (data) => {
     if (data.apiKey) {
-      apiKey = data.apiKey;
+      apiKey = data.apiKey.trim();
     }
   });
 }
@@ -74,8 +74,8 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
             chrome.windows.create({
               url: chrome.runtime.getURL("popup.html"),
               type: 'popup',
-              width: 400,
-              height: 300
+              width: 1000,
+              height: 800
             });
           });
         })
