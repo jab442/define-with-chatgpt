@@ -1,6 +1,15 @@
 import { ENV } from './define-with-chat-gpt-key.js';
 
-const apiKey = ENV.API_KEY;
+//const apiKey = ENV.API_KEY;
+let apiKey = '';
+setApiKey();
+function setApiKey(){
+  chrome.storage.local.get('apiKey', (data) => {
+    if (data.apiKey) {
+      apiKey = data.apiKey;
+    }
+  });
+}
 console.log("Background script running");
 let lastResponse = '';
 let model = "gpt-4-1106-preview";
@@ -17,6 +26,7 @@ chrome.runtime.onInstalled.addListener(() => {
 // Listener for context menu click
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === "sendSelectedText") {
+    setApiKey();
     let selectedText = info.selectionText;
     if (selectedText) {
       chrome.scripting.executeScript({
