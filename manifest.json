@@ -1,43 +1,41 @@
 {
-  "manifest_version": 3,
-  "name": "Define with ChatGPT",
-  "version": "1.0",
-  "permissions": [
+    "manifest_version": 3,
+    "name": "Define with ChatGPT",
+    "version": "1.0",
+    "permissions": [
       "activeTab",
       "scripting",
       "storage",
-      "tabs",
       "contextMenus",
-      "notifications"
-  ],
-  "host_permissions": [
-      "https://api.openai.com/*"
-  ],
-  "content_security_policy": {
-      "extension_pages": "script-src 'self'; object-src 'self'"
-  },
-  "background": {
+      "notifications",
+      "https://api.openai.com/*" 
+    ],
+    "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self'" 
+    },
+    "background": {
       "service_worker": "background.js",
       "type": "module"
-  },
-  "action": {
+    },
+    "action": {
       "default_popup": "menu.html",
       "default_icon": {
-          "16": "icons/define-with-chat-gpt.png",
-          "48": "icons/define-with-chat-gpt.png",
-          "128": "icons/define-with-chat-gpt.png"
+        "16": "icons/define-with-chat-gpt.png",
+        "48": "icons/define-with-chat-gpt.png",
+        "128": "icons/define-with-chat-gpt.png"
       }
-  },
-  "content_scripts": [
+    },
+    "content_scripts": [
       {
-          "matches": ["http://*/*", "https://*/*"],
-          "js": ["content.js"]
+        "matches": ["http://*/*", "https://*/*"],
+        "js": ["content.js"]
       }
-  ],
-  "web_accessible_resources": [
+    ],
+    "web_accessible_resources": [
       {
-          "resources": ["menu.js"],
-          "matches": ["<all_urls>"]
+        "resources": ["menu.js"],
+        "matches": ["<all_urls>"]
       }
-  ]
-}
+    ]
+  }
+  
